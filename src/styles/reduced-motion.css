@@ -11,3 +11,4 @@
 .rm .stop::before{display:none}
 .rm .belt ul{flex-wrap:wrap;width:auto}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.rm .statement span{opacity:1!important}

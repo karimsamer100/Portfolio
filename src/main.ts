@@ -16,6 +16,8 @@ import { renderRest, tick, watch } from './lib/scroll-engine';
 import { initChrome } from './sections/chrome';
 import { initHero } from './sections/hero';
 import { initAbout } from './sections/about';
+import { initWorkIndex } from './sections/work-index';
+import { initViewer } from './sections/viewer';
 
 const root = document.documentElement;
 if (reducedMotion) root.classList.add('rm');
@@ -24,6 +26,8 @@ if (previewEnabled) root.classList.add('preview-on');
 initChrome();
 const hero = initHero();
 initAbout();
+const viewer = initViewer();
+initWorkIndex(viewer.open);
 
 /** Layout-dependent measurements, re-run on resize. */
 const layouts: (() => void)[] = [hero.fit];
@@ -34,7 +38,10 @@ function layout() {
   else tick();
 }
 
-if (!reducedMotion) watch(window);
+if (!reducedMotion) {
+  watch(window);
+  watch(viewer.viewer);
+}
 addEventListener('resize', layout);
 
 /** Measure only after the display faces are in, otherwise the name is fitted with fallback metrics. */

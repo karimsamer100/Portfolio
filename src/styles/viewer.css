@@ -65,3 +65,8 @@
 .next{width:100%;background:none;border:0;border-top:1px solid var(--rule-i);padding:28px 0 8px;display:flex;justify-content:space-between;align-items:end;gap:16px;cursor:pointer;color:var(--paper);text-align:left}
 .next b{font:850 clamp(2rem,6vw,5rem)/.85 var(--display);font-stretch:62%;text-transform:uppercase;transition:color .3s}
 .next:hover b{color:var(--blue-lit)}
+.muted{color:var(--mute-i)}
+.paper .muted{color:var(--mute-p)}
+.compare>.mono:last-child{color:var(--paper)}
+.topk{opacity:0}
+.next .mono{color:var(--mute-i)}

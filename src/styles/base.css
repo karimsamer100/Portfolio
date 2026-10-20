@@ -1,0 +1,44 @@
+*{box-sizing:border-box}
+html{background:var(--ink)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue-lit);outline-offset:4px}
+.mono{font:500 .72rem/1.35 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.ar{font-family:var(--arabic);font-weight:700}
+.pad{padding-left:var(--gl);padding-right:var(--gr)}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* chrome */
+.chrome{position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:calc(14px + env(safe-area-inset-top,0px)) var(--gr) 14px var(--gl);color:#fff;mix-blend-mode:difference;pointer-events:none}
+.chrome a{pointer-events:auto}
+.chrome .who{font:600 .9rem var(--display);font-stretch:90%;letter-spacing:.02em;text-decoration:none}
+.chrome nav{display:flex;gap:clamp(12px,2.4vw,28px)}
+.chrome nav a{text-decoration:none;font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 0;border-bottom:1px solid transparent}
+.chrome nav a:hover{border-color:currentColor}
+@media (max-width:520px){.chrome nav .opt{display:none}}
+.bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:var(--blue);transform-origin:0 50%;transform:scaleX(0);z-index:21}
+
+/* photo slots: placeholders until Karim supplies real photos; click to preview locally */
+.slot{position:relative;display:block;overflow:hidden;cursor:pointer;background:
+  repeating-linear-gradient(135deg,transparent 0 9px,var(--hatch,rgba(12,14,18,.09)) 9px 10px);border:1px solid var(--hatch-b,rgba(12,14,18,.18))}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot .cap{position:absolute;left:10px;right:10px;bottom:10px;color:var(--cap,var(--mute-p));display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.slot .cap b{font-weight:500;color:var(--cap-b,var(--ink))}
+.slot.has{border-color:transparent;background:none}
+.slot.has .cap{opacity:0}
+.slot:focus-within{outline:2px solid var(--blue-lit);outline-offset:3px}
+.on-ink .slot{--hatch:rgba(232,233,227,.07);--hatch-b:rgba(232,233,227,.16);--cap:var(--mute-i);--cap-b:var(--paper)}
+
+/* scene scaffolding */
+.scene{position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+
+/* Photo slots are clickable previews only in dev (see lib/photo-slot.ts). */
+.slot{cursor:default}
+.slot .hint{display:none}
+.preview-on .slot{cursor:pointer}
+.preview-on .slot .hint{display:inline}
+.skip{position:fixed;left:var(--gl);top:-60px;z-index:40;background:var(--ink);color:var(--paper);padding:10px 14px;font:500 .8rem var(--mono);text-decoration:none}
+.skip:focus{top:calc(10px + env(safe-area-inset-top,0px))}

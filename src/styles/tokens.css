@@ -1,0 +1,11 @@
+/* Layout: one continuous blue ink line threads a full-bleed, pinned scroll story. Paper and ink alternate as acts; projects open as their own scroll chapters over the page. Single committed look (no theme switch). */
+:root{
+  --paper:#E8E9E3; --ink:#0C0E12; --blue:#2234D4; --blue-lit:#7E8BFF;
+  --mute-p:#5C6168; --mute-i:#8A909A; --rule-p:#C8CAC2; --rule-i:#22262D; --soft-i:#B9BEC6;
+  --display:"Archivo Variable","Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --arabic:"Reem Kufi","Noto Kufi Arabic","Geeza Pro",Tahoma,sans-serif;
+  --gl:max(20px,env(safe-area-inset-left,0px)); --gr:max(20px,env(safe-area-inset-right,0px));
+  color-scheme:light;
+}

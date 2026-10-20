@@ -1,0 +1,6 @@
+/* Self-hosted variable and static faces (OFL, see src/assets/fonts/LICENSE.md). */
+@font-face{font-family:"Archivo Variable";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;src:url("../assets/fonts/archivo-variable.woff2") format("woff2")}
+@font-face{font-family:"Reem Kufi";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/reem-kufi-arabic-700.woff2") format("woff2");unicode-range:U+0020,U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:400;font-display:swap;src:url("../assets/fonts/ibm-plex-sans-400.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/ibm-plex-sans-500.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/ibm-plex-mono-500.woff2") format("woff2")}

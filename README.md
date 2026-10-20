@@ -38,7 +38,7 @@ src/assets/sirengrid/      Nasr City map data, loaded only when the chapter open
 - **Motion.** A scene's `update(p)` must depend only on `p`, so scrolling backwards replays it exactly. Animate with transforms and opacity. The hero's `font-stretch` is the one deliberate exception.
 - **Reduced motion.** `.rm` on `<html>` turns off pinning and renders every scene at its `rest` progress. Each new scene needs a readable rest state.
 - **Adding a project.** Add an entry to `src/content/projects.ts`. Then write a chapter module in `src/sections/projects/` that implements `Chapter` (`mount`, `update`, optional `activate` for lazy assets) and register it in `CHAPTERS` in `src/sections/viewer.ts`. `mountBeats` in `types.ts` gives the headline-per-beat style used by DrRepo and SirenGrid.
-- **Adding photos.** Put them in `src/assets/photos/`, import them in `src/content/photos.ts`, `experience.ts` or `credentials.ts`. Empty slots show placeholders only in dev or with `?preview`, never on the live site.
+- **Adding photos.** Drop correctly named files into `src/assets/photos/` (see `docs/IMAGES.md`); `src/content/images.ts` picks them up, no code changes. Missing images show placeholders only in dev or with `?preview`, never on the live site.
 - **Honesty.** Every number on the site comes from the linked repositories. Group work is labelled as group work. Mark anything still unconfirmed with `todo: true` until Karim confirms it.
 
 ## Open items before launch

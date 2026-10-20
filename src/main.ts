@@ -18,6 +18,9 @@ import { initHero } from './sections/hero';
 import { initAbout } from './sections/about';
 import { initWorkIndex } from './sections/work-index';
 import { initViewer } from './sections/viewer';
+import { initExperience } from './sections/experience';
+import { initLearning } from './sections/learning';
+import { initContact } from './sections/contact';
 
 const root = document.documentElement;
 if (reducedMotion) root.classList.add('rm');
@@ -28,21 +31,30 @@ const hero = initHero();
 initAbout();
 const viewer = initViewer();
 initWorkIndex(viewer.open);
+const experience = initExperience();
+initLearning(!reducedMotion);
+initContact();
 
 /** Layout-dependent measurements, re-run on resize. */
-const layouts: (() => void)[] = [hero.fit];
+const layouts: (() => void)[] = [hero.fit, experience.build];
 
 function layout() {
   layouts.forEach((fn) => fn());
-  if (reducedMotion) renderRest();
-  else tick();
+  if (reducedMotion) {
+    renderRest();
+    experience.revealAll();
+  } else tick();
 }
 
 if (!reducedMotion) {
   watch(window);
   watch(viewer.viewer);
 }
-addEventListener('resize', layout);
+let resizeTimer = 0;
+addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = window.setTimeout(layout, 120);
+});
 
 /** Measure only after the display faces are in, otherwise the name is fitted with fallback metrics. */
 const fontsReady = document.fonts

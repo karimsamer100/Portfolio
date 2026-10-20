@@ -2,11 +2,15 @@ import { $, esc, h, reducedMotion } from '../lib/dom';
 import { addScene, renderRest, tick } from '../lib/scroll-engine';
 import { projects } from '../content/projects';
 import type { Chapter } from './projects/types';
+import { drrepo } from './projects/drrepo';
+import { sirengrid } from './projects/sirengrid';
 import { distributed } from './projects/distributed';
 import { supportRag } from './projects/support-rag';
 import { mnist } from './projects/mnist';
 
 const CHAPTERS: Record<string, () => Chapter> = {
+  drrepo,
+  sirengrid,
   distributed,
   'support-rag': supportRag,
   mnist,
@@ -22,6 +26,7 @@ export function initViewer() {
   const counter = $('vIdx');
   const main = $('main');
   const articles: HTMLElement[] = [];
+  const chapters: Chapter[] = [];
   let opener: HTMLElement | null = null;
   let origin = { x: innerWidth / 2, y: innerHeight / 2 };
 
@@ -54,6 +59,7 @@ export function initViewer() {
     const copy = article.querySelector<HTMLElement>('.w-copy')!;
     const visual = article.querySelector<HTMLElement>('.visual')!;
     chapter.mount(copy, visual);
+    chapters.push(chapter);
     if (chapter.visualFirst) stage.prepend(visual);
     article.querySelector('.next')!.addEventListener('click', () => switchTo((i + 1) % projects.length));
     addScene({ el: article.querySelector<HTMLElement>('.proj-scene')!, update: chapter.update, rest: 1 });
@@ -63,6 +69,7 @@ export function initViewer() {
 
   function show(i: number) {
     articles.forEach((a, j) => (a.hidden = j !== i));
+    chapters[i].activate?.();
     counter.textContent = `${String(i + 1).padStart(2, '0')} / ${String(articles.length).padStart(2, '0')}`;
     viewer.setAttribute('aria-label', projects[i].name);
     viewer.scrollTop = 0;

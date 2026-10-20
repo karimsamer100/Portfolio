@@ -27,8 +27,8 @@ test.describe('portfolio', () => {
     await page.goto('/');
     await page.waitForTimeout(2300);
     const rows = page.locator('.row');
-    await expect(rows).toHaveCount(3);
-    await rows.nth(1).focus();
+    await expect(rows).toHaveCount(5);
+    await rows.nth(3).focus();
     await page.keyboard.press('Enter');
     const viewer = page.locator('#viewer');
     await expect(viewer).toBeVisible();
@@ -36,13 +36,13 @@ test.describe('portfolio', () => {
     await expect(page.locator('#vClose')).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(viewer).toBeHidden();
-    await expect(rows.nth(1)).toBeFocused();
+    await expect(rows.nth(3)).toBeFocused();
   });
 
   test('chapter scenes animate with scroll inside the viewer', async ({ page }) => {
     await page.goto('/');
     await page.waitForTimeout(2300);
-    await page.locator('.row').first().click();
+    await page.locator('.row').nth(2).click();
     await page.waitForTimeout(1000);
     await page.evaluate(() => {
       const v = document.getElementById('viewer')!;
@@ -51,6 +51,33 @@ test.describe('portfolio', () => {
     });
     await page.waitForTimeout(300);
     await expect(page.locator('.proj:not([hidden]) .big').first()).toContainText('1,000');
+  });
+});
+
+test.describe('credentials', () => {
+  test('a certificate opens in the viewer with its title as the heading', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(2300);
+    const tiles = page.locator('#shelves .tile');
+    await expect(tiles).toHaveCount(8);
+    await tiles.nth(2).scrollIntoViewIfNeeded();
+    await tiles.nth(2).click();
+    const viewer = page.locator('#cviewer');
+    await expect(viewer).toBeVisible();
+    await expect(page.locator('#cvTitle')).toHaveText('Responsible Innovation & Trustworthy AI');
+    await expect(page.locator('#cvClose')).toBeFocused();
+    await page.keyboard.press('ArrowRight');
+    await expect(page.locator('#cvTitle')).toHaveText('Machine Learning Engineer track');
+    await page.keyboard.press('Escape');
+    await expect(viewer).toBeHidden();
+    await expect(tiles.nth(3)).toBeFocused();
+  });
+
+  test('SirenGrid chapter loads its map lazily', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(2300);
+    await page.locator('.row').nth(1).click();
+    await expect(page.locator('.proj:not([hidden]) .map .ma')).toHaveCount(1);
   });
 });
 

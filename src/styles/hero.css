@@ -1,25 +1,30 @@
 /* hero */
 #hero{height:280vh;background:var(--paper)}
 .hero-stage{background:var(--paper)}
-.portrait{position:absolute;left:50%;bottom:0;height:76%;aspect-ratio:4/5;max-width:86vw;transform:translateX(-50%);z-index:0;border-bottom:0}
-.portrait img{mix-blend-mode:multiply;filter:grayscale(1) contrast(1.18) brightness(1.04)}
-.portrait .cap{bottom:24%}
-@media (max-width:640px){.portrait .cap{bottom:auto;top:12px}}
-.hero-line{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+/* Full-height cut-out portrait, layered between the two words: KARIM behind, SAMER in front. */
+.portrait{position:absolute;left:50%;bottom:0;height:100%;aspect-ratio:3/4;max-width:100vw;transform:translateX(-50%);z-index:2;border:0;background:none;transform-origin:50% 100%}
+.portrait img{object-fit:contain;object-position:50% 100%;mix-blend-mode:multiply;filter:grayscale(1) contrast(1.12)}
+.portrait:not(.has){display:none}
+/* Dev preview: a silhouette stands in so the composition reads without a real photo. */
+.preview-on .portrait:not(.has){display:block;cursor:pointer;background:repeating-linear-gradient(135deg,transparent 0 9px,rgba(12,14,18,.12) 9px 10px);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Cellipse cx='150' cy='130' rx='62' ry='78'/%3E%3Crect x='124' y='190' width='52' height='60'/%3E%3Cpath d='M20 400C26 290 86 252 150 248C214 252 274 290 280 400Z'/%3E%3C/svg%3E") 50% 100%/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Cellipse cx='150' cy='130' rx='62' ry='78'/%3E%3Crect x='124' y='190' width='52' height='60'/%3E%3Cpath d='M20 400C26 290 86 252 150 248C214 252 274 290 280 400Z'/%3E%3C/svg%3E") 50% 100%/contain no-repeat}
+.portrait .cap{display:none}
+.hero-line{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
 .hero-line path{fill:none;stroke:var(--blue);stroke-linecap:round;vector-effect:non-scaling-stroke}
-.names{position:absolute;left:0;right:0;top:clamp(64px,11vh,120px);margin:0;z-index:2;pointer-events:none}
-.names .en{display:block;font-family:var(--display);font-weight:900;font-stretch:125%;line-height:.8;letter-spacing:-.01em;white-space:nowrap;will-change:transform;text-transform:uppercase}
-.names .en2{text-align:right}
+.names{position:absolute;left:0;right:0;top:clamp(64px,11vh,120px);margin:0;pointer-events:none}
+.names .en{position:relative;z-index:1;display:block;font-family:var(--display);font-weight:900;font-stretch:125%;line-height:.8;letter-spacing:-.01em;white-space:nowrap;will-change:transform;text-transform:uppercase}
+.names .en2{text-align:right;z-index:3}
 .names .en span{display:inline-block}
-.names .ar{display:block;text-align:right;color:var(--blue);line-height:1.1;white-space:nowrap;will-change:transform}
-.hero-mid{position:absolute;left:var(--gl);right:var(--gr);top:50%;transform:translateY(-50%);text-align:center;opacity:0;pointer-events:none;z-index:2}
+.names .ar{position:relative;z-index:3;display:block;text-align:right;color:var(--blue);line-height:1.1;white-space:nowrap;will-change:transform}
+.hero-mid{position:absolute;left:var(--gl);right:var(--gr);top:50%;transform:translateY(-50%);text-align:center;opacity:0;pointer-events:none;z-index:3}
 .hero-mid h2{margin:10px auto 0;font:800 clamp(2rem,5.6vw,5rem)/.95 var(--display);font-stretch:75%;max-width:14ch;text-wrap:balance;text-transform:uppercase}
-.hero-foot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:end;gap:20px;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:2;pointer-events:none}
+.hero-foot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:end;gap:20px;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:5;pointer-events:none}
 .hero-foot p{margin:0;max-width:30ch;font-size:.95rem;background:var(--paper);padding:6px 8px 6px 0}
 .hero-foot .cue{display:flex;align-items:center;gap:10px;color:var(--mute-p)}
 .cue i{display:block;width:1px;height:38px;background:var(--mute-p);animation:cue 1.8s ease-in-out infinite}
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-@media (max-width:640px){.hero-foot .cue{display:none}.names{top:15svh}.portrait{height:58%}.hero-foot p{max-width:24ch;font-size:.88rem}}
+@media (max-width:640px){.hero-foot .cue{display:none}.names{top:15svh}.portrait{height:86%}.hero-foot p{max-width:24ch;font-size:.88rem}}
 .ld .en span{transform:translateY(105%)}
 .ld .names{visibility:hidden}
 .ld .ar,.ld .hero-foot,.ld .portrait{opacity:0}

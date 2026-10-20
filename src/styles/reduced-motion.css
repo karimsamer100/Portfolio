@@ -9,6 +9,9 @@
 .rm .track svg,.rm .yr{display:none}
 .rm .stop{position:relative;left:auto!important;top:auto!important;bottom:auto!important;opacity:1;transform:none;width:auto;border-left:2px solid var(--blue)}
 .rm .stop::before{display:none}
-.rm .belt ul{flex-wrap:wrap;width:auto}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 .rm .statement span{opacity:1!important}
+.rm .beat-copy .w-title,.rm .beat-copy .w-sub{position:static!important;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal}
+.rm .beats{display:none}
+.rm .pics{height:auto;display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.rm .pic{position:relative;transform:none!important}

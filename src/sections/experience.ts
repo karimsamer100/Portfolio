@@ -1,12 +1,13 @@
 import { $, esc, h } from '../lib/dom';
-import { clamp, easeInOut } from '../lib/math';
+import { clamp, easeInOut, easeOut, mix } from '../lib/math';
 import { addScene } from '../lib/scroll-engine';
-import { enablePreview, setImage } from '../lib/photo-slot';
+import { enablePreview, previewEnabled, setImage } from '../lib/photo-slot';
 import { experience } from '../content/experience';
 
 /**
  * Horizontal timeline driven by vertical scroll. The ink line draws as the track moves;
- * the stop nearest the reading position swaps the oversized background (name or photo).
+ * the stop nearest the reading position swaps the oversized background (name or photo), and
+ * each stop's image cards fan out while it is near the reading position.
  * On phones the track settles on each stop instead of gliding continuously.
  */
 export function initExperience() {
@@ -18,7 +19,7 @@ export function initExperience() {
   let trackWidth = 0;
   let gap = 0;
   let start = 0;
-  let stops: { el: HTMLElement; x: number }[] = [];
+  let stops: { el: HTMLElement; x: number; cards: HTMLElement[] }[] = [];
 
   const backgrounds = experience.map((s) => {
     const bg = h('div', 'x-bg', `<span>${esc(s.short)}</span>`);
@@ -61,6 +62,14 @@ export function initExperience() {
       const el = h('div', `stop off ${up ? 'up' : 'dn'}`);
       el.style.setProperty('--stem', `${stem}px`);
       el.innerHTML = `<span class="when mono">${esc(s.when)}</span><span class="org">${esc(s.org)}</span><span class="role">${esc(s.role)}</span>`;
+      const shown = (s.images ?? []).filter((m) => m.src || previewEnabled);
+      const pics = h('div', 'pics');
+      for (const m of shown) {
+        const c = h('div', `pic ${m.kind}`, m.src ? '' : `<span class="mono">${m.kind}</span>`);
+        if (m.src) c.innerHTML = `<img src="${m.src}" alt="${esc(m.alt)}" loading="lazy" decoding="async">`;
+        pics.append(c);
+      }
+      if (shown.length) up ? el.prepend(pics) : el.append(pics);
       el.style.left = `${x}px`;
       if (up) el.style.bottom = `${vh - lineY + stem}px`;
       else el.style.top = `${lineY + stem}px`;
@@ -68,7 +77,7 @@ export function initExperience() {
       enablePreview(add, (u) => setImage(backgrounds[i], u), `Preview a photo for ${s.org}`);
       if (add.querySelector('input')) el.append(add);
       track.append(el);
-      stops.push({ el, x });
+      stops.push({ el, x, cards: [...pics.children] as HTMLElement[] });
     });
   }
 
@@ -87,16 +96,31 @@ export function initExperience() {
     stops.forEach((s, i) => {
       const sx = s.x - shift;
       s.el.classList.toggle('off', sx > vw * 0.88 || sx < -vw * 0.5);
-      const d = Math.abs(sx - vw * (vw < 640 ? 0.12 : 0.4));
+      const focus = vw * (vw < 640 ? 0.12 : 0.4);
+      const d = Math.abs(sx - focus);
+      fan(s.cards, easeOut(clamp(1 - d / (vw * 0.32))));
       if (d < best) [best, active] = [d, i];
     });
     backgrounds.forEach((b, i) => b.classList.toggle('on', i === active));
+  }
+
+  /** Stacked while the stop is away, spread side by side while it is in focus. */
+  function fan(cards: HTMLElement[], a: number) {
+    const mid = (cards.length - 1) / 2;
+    const step = stage.clientWidth < 640 ? 70 : 96;
+    cards.forEach((c, j) => {
+      c.style.transform = `translate(${mix(j * 6, j * step, a)}px,${mix(-j * 4, Math.abs(j - mid) * 4, a)}px) rotate(${mix((j - mid) * 5, (j - mid) * 2.4, a)}deg)`;
+    });
   }
 
   addScene({ el: $('experience'), update, rest: 1 });
   return {
     build,
     /** Reduced motion shows every stop statically. */
-    revealAll: () => stops.forEach((s) => s.el.classList.remove('off')),
+    revealAll: () =>
+      stops.forEach((s) => {
+        s.el.classList.remove('off');
+        fan(s.cards, 1);
+      }),
   };
 }

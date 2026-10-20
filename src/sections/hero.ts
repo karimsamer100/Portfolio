@@ -5,8 +5,8 @@ import { initSlot } from '../lib/photo-slot';
 import { photos } from '../content/photos';
 
 /**
- * Opening: the name sits on a hand-drawn ink line over the portrait. Scrolling splits and
- * condenses the name, fades the portrait, then thickens the line until it floods the screen
+ * Opening: a full-height portrait stands between the two words of the name (KARIM behind,
+ * SAMER and the ink line in front). Scrolling splits and condenses the name, sinks the portrait, then thickens the line until it floods the screen
  * with ink, handing over to the About act.
  */
 export function initHero() {
@@ -53,9 +53,10 @@ export function initHero() {
     ar.style.transform = `translateX(${-easeInOut(seg(p, 0, 0.4)) * W * 0.45}px)`;
     ar.style.opacity = String(1 - seg(p, 0.18, 0.34));
 
-    const pf = seg(p, 0.04, 0.4);
+    // The portrait holds while the name splits, then sinks back as the line takes over.
+    const pf = seg(p, 0.12, 0.42);
     portrait.style.opacity = stage.classList.contains('ld') ? '' : String(1 - easeOut(pf));
-    portrait.style.transform = `translateX(-50%) translateY(${pf * 6}%) scale(${1 + pf * 0.08})`;
+    portrait.style.transform = `translateX(-50%) translateY(${pf * 8}%) scale(${1 - pf * 0.06})`;
 
     mid.style.opacity = String(seg(p, 0.3, 0.44) * (1 - seg(p, 0.56, 0.66)));
     mid.style.transform = `translateY(calc(-50% + ${(1 - seg(p, 0.3, 0.48)) * 30}px))`;

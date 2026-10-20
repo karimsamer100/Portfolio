@@ -32,7 +32,7 @@ initAbout();
 const viewer = initViewer();
 initWorkIndex(viewer.open);
 const experience = initExperience();
-initLearning(!reducedMotion);
+initLearning();
 initContact();
 
 /** Layout-dependent measurements, re-run on resize. */

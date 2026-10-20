@@ -1,7 +1,7 @@
 import { $, esc, h } from '../lib/dom';
-import { projects } from '../content/projects';
+import { alsoBuilt, projects } from '../content/projects';
 
-/** "Selected work": one row per project; each row opens that project's chapter. */
+/** "Selected work": one row per project opens its chapter; smaller projects follow as links. */
 export function initWorkIndex(open: (index: number, from: MouseEvent | null, trigger?: HTMLElement) => void) {
   const rows = $('rows');
   projects.forEach((p, i) => {
@@ -16,4 +16,7 @@ export function initWorkIndex(open: (index: number, from: MouseEvent | null, tri
     row.addEventListener('click', (e) => open(i, e.detail ? e : null, row));
     rows.append(row);
   });
+  $('also').innerHTML = alsoBuilt
+    .map((a) => `<a class="mw" href="${a.repo}" target="_blank" rel="noopener"><span class="mono">${esc(a.label)}</span><b>${esc(a.name)} ↗</b><span>${esc(a.text)}</span></a>`)
+    .join('');
 }

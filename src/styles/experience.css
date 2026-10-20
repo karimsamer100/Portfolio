@@ -24,3 +24,16 @@
 .stop .add{justify-self:start;margin-top:6px;cursor:pointer;color:var(--mute-p);border-bottom:1px dashed var(--mute-p);position:relative}
 .stop .add:focus-within{outline:2px solid var(--blue);outline-offset:3px}
 .stop.off{opacity:0;transform:translateY(14px)}
+/* image cards per stop: photos and certificates, fanned by scroll */
+.pics{position:relative;height:84px;margin-bottom:10px}
+.stop.dn .pics{margin:10px 0 0}
+.pic{position:absolute;left:0;bottom:0;width:108px;height:78px;overflow:hidden;background:#fff;border:1px solid #fff;box-shadow:0 8px 18px -10px rgba(12,14,18,.55);transition:transform .5s cubic-bezier(.2,.75,.1,1)}
+.stop.dn .pic{top:0;bottom:auto}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pic.photo img{filter:grayscale(1) contrast(1.08)}
+.pic.certificate{background:#FBFBF8;border-color:var(--rule-p)}
+.pic.certificate img{object-fit:contain;padding:4px}
+.pic:not(:has(img)){background:repeating-linear-gradient(135deg,#dcddd6 0 8px,#d0d1ca 8px 9px)}
+.pic.certificate:not(:has(img)){background:#FBFBF8}
+.pic>span{position:absolute;left:6px;bottom:4px;font-size:.5rem;color:var(--mute-p)}
+@media (max-width:640px){.pics{height:64px}.pic{width:82px;height:60px}}

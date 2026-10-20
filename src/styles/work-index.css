@@ -26,3 +26,10 @@
   .row .fig{grid-column:2;justify-items:start;text-align:left;grid-row:2}
   .row .go-arrow{grid-column:3;grid-row:1}
 }
+.also-wrap{display:grid;gap:12px}
+.also{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));border-top:1px solid var(--rule-i)}
+.mw{padding:18px 24px 18px 0;border-bottom:1px solid var(--rule-i);display:grid;gap:6px;align-content:start;min-width:0;text-decoration:none;color:var(--paper)}
+.mw b{font:800 clamp(1.15rem,1.6vw,1.4rem)/1.05 var(--display);font-stretch:80%;text-transform:uppercase;transition:color .3s}
+.mw:hover b{color:var(--blue-lit)}
+.mw span:last-child{font-size:.9rem;color:var(--soft-i)}
+.mw .mono{color:var(--mute-i)}

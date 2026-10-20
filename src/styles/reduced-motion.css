@@ -11,6 +11,7 @@
 .rm .stop::before{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 .rm .statement span{opacity:1!important}
+.rm .facts-list li{opacity:1!important;transform:none!important}
 .rm .beat-copy .w-title,.rm .beat-copy .w-sub{position:static!important;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal}
 .rm .beats{display:none}
 .rm .pics{height:auto;display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}

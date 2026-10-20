@@ -45,5 +45,4 @@ src/assets/sirengrid/      Nasr City map data, loaded only when the chapter open
 
 - Real photos: the hero cut-out portrait, experience photos and certificate scans.
 - Karim's own role in Distributed RAG, Support RAG and MNIST. The dossier shows "To confirm" until this is set.
-- The About section design (three options under review).
 - An `og:image` social card and a final domain.

@@ -1,16 +1,11 @@
 import { $ } from '../lib/dom';
-import { seg } from '../lib/math';
+import { easeOut, seg } from '../lib/math';
 import { addScene } from '../lib/scroll-engine';
-import { initSlot } from '../lib/photo-slot';
-import { photos } from '../content/photos';
 
-/** Statement lights up word by word; the two photos drift at different speeds. */
+/** A short introduction lights up word by word, then the three numbered facts settle in. */
 export function initAbout() {
   const statement = $('statement');
-  const ph1 = $('ph1');
-  const ph2 = $('ph2');
-  initSlot(ph1, photos.campus, 'Preview a campus photo');
-  initSlot(ph2, photos.atWork, 'Preview a photo at work');
+  const facts = [...$('aboutFacts').children] as HTMLElement[];
 
   const split = (node: Node) => {
     for (const n of [...node.childNodes]) {
@@ -38,10 +33,13 @@ export function initAbout() {
     el: $('about'),
     rest: 1,
     update(p) {
-      const k = seg(p, 0.08, 0.8) * words.length;
+      const k = seg(p, 0.06, 0.5) * words.length;
       words.forEach((w, i) => (w.style.opacity = i < k ? '1' : '.14'));
-      ph1.style.transform = `translateY(${(0.5 - p) * 60}px)`;
-      ph2.style.transform = `translateY(${(0.5 - p) * -50}px)`;
+      facts.forEach((f, i) => {
+        const t = easeOut(seg(p, 0.48 + i * 0.1, 0.66 + i * 0.1));
+        f.style.opacity = String(t);
+        f.style.transform = `translateY(${(1 - t) * 16}px)`;
+      });
     },
   });
 }

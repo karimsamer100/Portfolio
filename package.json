@@ -1,0 +1,19 @@
+{
+  "name": "karim-samer-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "shots": "node scripts/screenshots.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

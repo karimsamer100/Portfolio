@@ -1,0 +1,13 @@
+/* reduced motion: unpin everything, show final states */
+.rm .scene{height:auto!important}
+.rm .stage{position:relative;height:auto;min-height:100vh;min-height:100svh}
+.rm .cue i{animation:none}
+.rm .x-stage{min-height:0;padding-block:120px 60px}
+.rm .x-bgs{display:none}
+.rm .x-head{position:relative;left:auto;right:auto;top:auto;padding-left:var(--gl);padding-right:var(--gr);margin-bottom:28px}
+.rm .track{position:relative;transform:none!important;height:auto;width:auto!important;display:grid;gap:22px;padding-left:var(--gl);padding-right:var(--gr)}
+.rm .track svg,.rm .yr{display:none}
+.rm .stop{position:relative;left:auto!important;top:auto!important;bottom:auto!important;opacity:1;transform:none;width:auto;border-left:2px solid var(--blue)}
+.rm .stop::before{display:none}
+.rm .belt ul{flex-wrap:wrap;width:auto}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

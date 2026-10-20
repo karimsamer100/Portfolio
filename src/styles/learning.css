@@ -1,0 +1,12 @@
+/* credentials */
+#learning{background:var(--paper);padding-block:clamp(70px,12vh,120px);display:grid;gap:28px;overflow:hidden}
+.l-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.l-head h2{margin:0;font:850 clamp(2.4rem,6vw,5.4rem)/.85 var(--display);font-stretch:66%;text-transform:uppercase}
+.l-head .ar{color:var(--blue);font-size:clamp(1.6rem,3.6vw,3rem);line-height:1}
+.belt{border-top:2px solid var(--blue);border-bottom:2px solid var(--blue);overflow:hidden}
+.belt+.belt{border-top:0}
+.belt ul{display:flex;gap:0;margin:0;padding:0;list-style:none;width:max-content;will-change:transform}
+.belt li{display:flex;align-items:baseline;gap:14px;padding:18px 34px;border-right:1px solid var(--rule-p);white-space:nowrap}
+.belt li b{font:800 clamp(1.3rem,2.6vw,2.2rem)/1 var(--display);font-stretch:72%;text-transform:uppercase}
+.belt li span{color:var(--mute-p)}
+.l-list{margin:0;padding:0;list-style:none}

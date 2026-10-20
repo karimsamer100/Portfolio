@@ -69,7 +69,8 @@ export function initExperience() {
         pics.append(c);
       }
       if (shown.length) up ? el.prepend(pics) : el.append(pics);
-      if (s.logo) el.prepend(h('span', 'logo', `<img src="${s.logo}" alt="${esc(s.org)} logo" decoding="async">`));
+      if (s.logos?.length)
+        el.prepend(h('span', 'logos', s.logos.map((l) => `<img src="${l.src}" alt="${esc(l.alt)}" decoding="async">`).join('')));
       el.style.left = `${x}px`;
       if (up) el.style.bottom = `${vh - lineY + stem}px`;
       else el.style.top = `${lineY + stem}px`;

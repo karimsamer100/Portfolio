@@ -24,7 +24,7 @@ per stop looks best. Photos are shown in their original colour, cropped to about
 
 | Stop | Folder |
 |---|---|
-| Ain Shams University (logo only) | `src/assets/photos/experience/ain-shams/logo.png` |
+| Ain Shams University (logos only) | `src/assets/photos/experience/ain-shams/` |
 | Huawei × NTI | `src/assets/photos/experience/huawei/` |
 | CIB Egypt | `src/assets/photos/experience/cib/` |
 | GSS | `src/assets/photos/experience/gss/` |
@@ -33,8 +33,8 @@ per stop looks best. Photos are shown in their original colour, cropped to about
 | Dell Technologies | `src/assets/photos/experience/dell/` |
 | Cisco Egypt | `src/assets/photos/experience/cisco/` |
 
-A file named `logo.png` in any of these folders is shown above that stop instead of as a card
-(Ain Shams uses only this). Keep photos under about 2 MB; very large camera files slow the page.
+Any file with `logo` in its name (for example `logo.png`, `university-of-east-london-logo.png`) is shown
+above that stop instead of as a card; several logos sit side by side (Ain Shams uses only logos). Keep photos under about 2 MB; very large camera files slow the page.
 
 Example:
 

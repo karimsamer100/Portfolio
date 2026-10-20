@@ -38,12 +38,17 @@ initContact();
 /** Layout-dependent measurements, re-run on resize. */
 const layouts: (() => void)[] = [hero.fit, experience.build];
 
-function layout() {
-  layouts.forEach((fn) => fn());
+/** Reduced motion renders every scene at rest; otherwise scenes follow the scroll position. */
+function render() {
   if (reducedMotion) {
     renderRest();
     experience.revealAll();
   } else tick();
+}
+
+function layout() {
+  layouts.forEach((fn) => fn());
+  render();
 }
 
 if (!reducedMotion) {
@@ -66,5 +71,5 @@ const fontsReady = document.fonts
 
 fontsReady.then(() => {
   layout();
-  hero.intro(reducedMotion ? renderRest : tick);
+  hero.intro(render);
 });

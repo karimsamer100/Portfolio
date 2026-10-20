@@ -20,9 +20,9 @@
 .stop .role{font-size:clamp(.92rem,1.1vw,1.02rem);color:#30353C}
 .stop .when{color:var(--blue)}
 .stop.off{opacity:0;transform:translateY(14px)}
-/* logo above a stop (Ain Shams) */
-.stop .logo{display:block;width:clamp(64px,7vw,92px);aspect-ratio:1;margin-bottom:10px}
-.stop .logo img{width:100%;height:100%;object-fit:contain;display:block}
+/* logos above a stop (Ain Shams × UEL) */
+.stop .logos{display:flex;align-items:center;gap:18px;margin-bottom:10px}
+.stop .logos img{height:clamp(56px,5.6vw,80px);width:auto;max-width:clamp(110px,10vw,150px);object-fit:contain;display:block}
 /* image cards per stop: photos and certificates, fanned by scroll */
 .pics{position:relative;height:102px;margin-bottom:10px}
 .stop.dn .pics{margin:10px 0 0}

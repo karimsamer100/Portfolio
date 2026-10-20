@@ -62,7 +62,7 @@ export function initHero() {
     const a = easeInOut(seg(p, 0, 0.5));
     en1.style.fontStretch = en2.style.fontStretch = `${125 - 50 * a}%`;
     en1.style.transform = `translateX(${-a * W * 0.62}px)`;
-    en2.style.transform = `translateX(${a * W * 0.62}px)`;
+    en2.style.transform = `translateX(${a * W * 1.05}px)`;
     ar.style.transform = `translateX(${-easeInOut(seg(p, 0, 0.4)) * W * 0.45}px)`;
     ar.style.opacity = String(1 - seg(p, 0.18, 0.34));
 

@@ -1,13 +1,14 @@
 import { $, reducedMotion } from '../lib/dom';
-import { easeIn, easeInOut, easeOut, mix, seg } from '../lib/math';
+import { easeIn, easeInOut, mix, seg } from '../lib/math';
 import { addScene } from '../lib/scroll-engine';
 import { initSlot } from '../lib/photo-slot';
 import { photos } from '../content/photos';
 
 /**
- * Opening: a full-height portrait stands between the two words of the name (KARIM behind,
- * SAMER and the ink line in front). Scrolling splits and condenses the name, sinks the portrait, then thickens the line until it floods the screen
- * with ink, handing over to the About act.
+ * Opening: the name on the left, a colour portrait standing on the right in front of the ink
+ * line (on phones: name, intro, then the portrait below). Scrolling splits and condenses the
+ * name behind the portrait, sinks the portrait, then thickens the line until it floods the
+ * screen with ink, handing over to the About act.
  */
 export function initHero() {
   const stage = $('heroStage');
@@ -28,17 +29,29 @@ export function initHero() {
     W = stage.clientWidth;
     H = stage.clientHeight;
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const mobile = W < 640;
+    const hasPortrait = portrait.classList.contains('has') || document.documentElement.classList.contains('preview-on');
+    // Desktop: the name keeps to the left of the portrait.
+    stage.style.setProperty('--names-r', mobile || !hasPortrait ? '0px' : `${Math.round(W * 0.44)}px`);
+    const room = mobile || !hasPortrait ? W : W * 0.56;
     const gutter = parseFloat(getComputedStyle(en1).paddingLeft) * 2;
     for (const e of [en1, en2]) {
       e.style.fontStretch = '125%';
       e.style.fontSize = '100px';
     }
     const widest = Math.max(...[en1, en2].map((e) => e.querySelector('.en-clip span')!.getBoundingClientRect().width));
-    const size = Math.min(((W - gutter) / widest) * 100 * 0.98, H * 0.27);
+    const size = Math.min(((room - gutter) / widest) * 100 * 0.98, H * (mobile ? 0.15 : 0.27));
     for (const e of [en1, en2]) e.style.fontSize = `${size}px`;
     ar.style.fontSize = `${Math.min(size * 0.52, H * 0.15)}px`;
     const names = $('names').getBoundingClientRect();
-    const y = names.bottom - stage.getBoundingClientRect().top - ar.offsetHeight * 0.16;
+    const top = stage.getBoundingClientRect().top;
+    const y = names.bottom - top - ar.offsetHeight * 0.16;
+    if (mobile) {
+      // Intro sits under the name; the portrait takes the rest of the screen below it.
+      stage.style.setProperty('--intro-y', `${Math.round(names.bottom - top + 14)}px`);
+      const introBottom = names.bottom - top + 14 + foot.offsetHeight;
+      stage.style.setProperty('--portrait-h', `${Math.max(H * 0.36, H - introBottom - 6)}px`);
+    }
     path.setAttribute(
       'd',
       `M -60 ${y + 10} C ${W * 0.22} ${y - 26}, ${W * 0.36} ${y + 30}, ${W * 0.55} ${y + 4} S ${W * 0.86} ${y - 18}, ${W + 60} ${y + 8}`,
@@ -53,10 +66,11 @@ export function initHero() {
     ar.style.transform = `translateX(${-easeInOut(seg(p, 0, 0.4)) * W * 0.45}px)`;
     ar.style.opacity = String(1 - seg(p, 0.18, 0.34));
 
-    // The portrait holds while the name splits, then sinks back as the line takes over.
-    const pf = seg(p, 0.12, 0.42);
-    portrait.style.opacity = stage.classList.contains('ld') ? '' : String(1 - easeOut(pf));
-    portrait.style.transform = `translateX(-50%) translateY(${pf * 8}%) scale(${1 - pf * 0.06})`;
+    // The portrait stays opaque while SAMER slides behind it, then sinks out of frame before
+    // the statement and the ink flood arrive, so no text ever sits on top of it.
+    const pf = easeIn(seg(p, 0.14, 0.34));
+    portrait.style.opacity = stage.classList.contains('ld') ? '' : String(1 - seg(p, 0.28, 0.34));
+    portrait.style.transform = `${W < 640 ? 'translateX(50%) ' : ''}translateY(${pf * 100}%)`;
 
     mid.style.opacity = String(seg(p, 0.3, 0.44) * (1 - seg(p, 0.56, 0.66)));
     mid.style.transform = `translateY(calc(-50% + ${(1 - seg(p, 0.3, 0.48)) * 30}px))`;

@@ -66,5 +66,5 @@ const fontsReady = document.fonts
 
 fontsReady.then(() => {
   layout();
-  hero.intro(tick);
+  hero.intro(reducedMotion ? renderRest : tick);
 });

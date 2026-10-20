@@ -2,7 +2,7 @@
 
 Drop files into `src/assets/photos/` with the names below. No code changes are needed: the
 site picks them up on the next `npm run dev` or `npm run build`. Allowed formats: `.jpg`,
-`.jpeg`, `.png`, `.webp`, `.avif`. Use lowercase names exactly as written.
+`.jpeg`, `.png`, `.webp`, `.avif`. Use lowercase names. Folder names match loosely (`ain-shams`, `ainshams` and `Ain_Shams` are the same folder).
 
 Anything missing simply doesn't show on the live site. In dev, or with `?preview` in the
 URL, missing images appear as grey placeholders so you can see where they go.
@@ -11,19 +11,20 @@ URL, missing images appear as grey placeholders so you can see where they go.
 
 | File | What |
 |---|---|
-| `src/assets/photos/portrait.png` | You, cut out with a **transparent background** (PNG or WebP). Head and shoulders to waist, facing camera, about 1200×1600 px. The bottom edge of the photo sits on the bottom of the screen. |
+| `src/assets/photos/portrait.webp` (or `.png`) | You, cut out with a **transparent background** (PNG or WebP). Head and shoulders to waist, facing camera, at least 1200 px. It stands on the right of the name (below it on phones), and its bottom edge sits on the bottom of the screen. |
 
-Tip: remove.bg or Photoshop "Remove background" both work. It is shown in grayscale.
+Tip: remove.bg or Photoshop "Remove background" both work. It is shown in full colour.
 
 ## 2. Experience (several images per stop)
 
 One folder per stop. Inside, name the images `1.jpg`, `2.jpg`, `3.jpg` … in the order you
-want them. Any file whose name starts with `certificate` (for example
+want them. Any file whose name starts with `cert` (for example
 `certificate.jpg`, `certificate-2.jpg`) gets the white certificate frame. Two to four images
-per stop looks best. Photos are shown in grayscale, about 4:3.
+per stop looks best. Photos are shown in their original colour, cropped to about 4:3.
 
 | Stop | Folder |
 |---|---|
+| Ain Shams University (logo only) | `src/assets/photos/experience/ain-shams/logo.png` |
 | Huawei × NTI | `src/assets/photos/experience/huawei/` |
 | CIB Egypt | `src/assets/photos/experience/cib/` |
 | GSS | `src/assets/photos/experience/gss/` |
@@ -32,8 +33,8 @@ per stop looks best. Photos are shown in grayscale, about 4:3.
 | Dell Technologies | `src/assets/photos/experience/dell/` |
 | Cisco Egypt | `src/assets/photos/experience/cisco/` |
 
-Optional: a file named `background.jpg` in any of these folders (including
-`experience/ain-shams/`) replaces that stop's large outlined name with a faint background photo.
+A file named `logo.png` in any of these folders is shown above that stop instead of as a card
+(Ain Shams uses only this). Keep photos under about 2 MB; very large camera files slow the page.
 
 Example:
 

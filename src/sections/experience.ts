@@ -1,12 +1,12 @@
 import { $, esc, h } from '../lib/dom';
 import { clamp, easeInOut, easeOut, mix } from '../lib/math';
 import { addScene } from '../lib/scroll-engine';
-import { enablePreview, previewEnabled, setImage } from '../lib/photo-slot';
+import { previewEnabled } from '../lib/photo-slot';
 import { experience } from '../content/experience';
 
 /**
  * Horizontal timeline driven by vertical scroll. The ink line draws as the track moves;
- * the stop nearest the reading position swaps the oversized background (name or photo), and
+ * the stop nearest the reading position swaps the oversized outlined name behind the track, and
  * each stop's image cards fan out while it is near the reading position.
  * On phones the track settles on each stop instead of gliding continuously.
  */
@@ -23,7 +23,6 @@ export function initExperience() {
 
   const backgrounds = experience.map((s) => {
     const bg = h('div', 'x-bg', `<span>${esc(s.short)}</span>`);
-    if (s.photo) setImage(bg, s.photo);
     bgHost.append(bg);
     return bg;
   });
@@ -70,12 +69,10 @@ export function initExperience() {
         pics.append(c);
       }
       if (shown.length) up ? el.prepend(pics) : el.append(pics);
+      if (s.logo) el.prepend(h('span', 'logo', `<img src="${s.logo}" alt="${esc(s.org)} logo" decoding="async">`));
       el.style.left = `${x}px`;
       if (up) el.style.bottom = `${vh - lineY + stem}px`;
       else el.style.top = `${lineY + stem}px`;
-      const add = h('label', 'add mono', '+ Preview photo');
-      enablePreview(add, (u) => setImage(backgrounds[i], u), `Preview a photo for ${s.org}`);
-      if (add.querySelector('input')) el.append(add);
       track.append(el);
       stops.push({ el, x, cards: [...pics.children] as HTMLElement[] });
     });
@@ -107,7 +104,7 @@ export function initExperience() {
   /** Stacked while the stop is away, spread side by side while it is in focus. */
   function fan(cards: HTMLElement[], a: number) {
     const mid = (cards.length - 1) / 2;
-    const step = stage.clientWidth < 640 ? 70 : 96;
+    const step = stage.clientWidth < 640 ? 70 : 118;
     cards.forEach((c, j) => {
       c.style.transform = `translate(${mix(j * 6, j * step, a)}px,${mix(-j * 4, Math.abs(j - mid) * 4, a)}px) rotate(${mix((j - mid) * 5, (j - mid) * 2.4, a)}deg)`;
     });

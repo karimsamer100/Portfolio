@@ -4,9 +4,7 @@
 .x-bgs{position:absolute;inset:0;z-index:0;pointer-events:none}
 .x-bg{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
 .x-bg.on{opacity:1}
-.x-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);mix-blend-mode:multiply;opacity:.3}
 .x-bg span{position:absolute;left:var(--gl);right:var(--gr);bottom:6vh;font:900 clamp(4rem,16vw,15rem)/.8 var(--display);font-stretch:62%;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.5px var(--rule-p);white-space:nowrap;overflow:hidden}
-.x-bg.has span{display:none}
 .x-head{position:absolute;left:var(--gl);right:var(--gr);top:clamp(70px,12vh,110px);display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;z-index:2}
 .x-head h2{margin:0;font:850 clamp(2.4rem,6vw,5.4rem)/.85 var(--display);font-stretch:66%;text-transform:uppercase}
 .x-head .ar{color:var(--blue);font-size:clamp(1.6rem,3.6vw,3rem);line-height:1}
@@ -21,16 +19,16 @@
 .stop .org{font:800 clamp(1.4rem,2.2vw,2rem)/1.02 var(--display);font-stretch:80%;text-transform:uppercase}
 .stop .role{font-size:clamp(.92rem,1.1vw,1.02rem);color:#30353C}
 .stop .when{color:var(--blue)}
-.stop .add{justify-self:start;margin-top:6px;cursor:pointer;color:var(--mute-p);border-bottom:1px dashed var(--mute-p);position:relative}
-.stop .add:focus-within{outline:2px solid var(--blue);outline-offset:3px}
 .stop.off{opacity:0;transform:translateY(14px)}
+/* logo above a stop (Ain Shams) */
+.stop .logo{display:block;width:clamp(64px,7vw,92px);aspect-ratio:1;margin-bottom:10px}
+.stop .logo img{width:100%;height:100%;object-fit:contain;display:block}
 /* image cards per stop: photos and certificates, fanned by scroll */
-.pics{position:relative;height:84px;margin-bottom:10px}
+.pics{position:relative;height:102px;margin-bottom:10px}
 .stop.dn .pics{margin:10px 0 0}
-.pic{position:absolute;left:0;bottom:0;width:108px;height:78px;overflow:hidden;background:#fff;border:1px solid #fff;box-shadow:0 8px 18px -10px rgba(12,14,18,.55);transition:transform .5s cubic-bezier(.2,.75,.1,1)}
+.pic{position:absolute;left:0;bottom:0;width:132px;height:96px;overflow:hidden;background:#fff;border:1px solid #fff;box-shadow:0 8px 18px -10px rgba(12,14,18,.55);transition:transform .5s cubic-bezier(.2,.75,.1,1)}
 .stop.dn .pic{top:0;bottom:auto}
 .pic img{width:100%;height:100%;object-fit:cover;display:block}
-.pic.photo img{filter:grayscale(1) contrast(1.08)}
 .pic.certificate{background:#FBFBF8;border-color:var(--rule-p)}
 .pic.certificate img{object-fit:contain;padding:4px}
 .pic:not(:has(img)){background:repeating-linear-gradient(135deg,#dcddd6 0 8px,#d0d1ca 8px 9px)}

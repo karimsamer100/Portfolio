@@ -22,9 +22,9 @@ index.html                 Static markup for the hero, about, section shells and
 src/content/               All copy and data. Edit these files to update the site.
   site.ts                  Name, email and outbound links. Never add the phone number.
   projects.ts              Index rows, chapter copy, dossier facts and the "Also built" list
-  experience.ts            Timeline stops: optional background `photo` and fanned `images` cards
+  experience.ts            Timeline stops: optional `logo` and fanned `images` cards
   credentials.ts           "Always learning" shelves; an `image` shows the scan in the viewer
-  photos.ts                Hero cut-out portrait (transparent PNG); hidden until set
+  photos.ts                Hero cut-out portrait (transparent WebP/PNG, full colour); hidden until set
 src/lib/scroll-engine.ts   Pinned scenes: each gets progress 0..1 while its section scrolls
 src/sections/              One module per section; projects/ holds one module per chapter visual
 src/styles/                tokens.css (palette, fonts), then one stylesheet per section
